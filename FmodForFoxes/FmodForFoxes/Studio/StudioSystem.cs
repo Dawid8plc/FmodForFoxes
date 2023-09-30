@@ -30,6 +30,20 @@ namespace FmodForFoxes.Studio
 		}
 
 		/// <summary>
+		/// Loads bank from stream with custom flags.
+		/// </summary>
+		public static Bank LoadBank(Stream stream, FMOD.Studio.LOAD_BANK_FLAGS flags)
+		{
+			Native.loadBankMemory(
+				FileLoader.ReadStreamAsBuffer(stream),
+				flags,
+				out FMOD.Studio.Bank bank
+			);
+
+			return new Bank(bank);
+		}
+
+		/// <summary>
 		/// Retrieves an event via internal path, i.e. "event:/UI/Cancel", or ID string, i.e. "{2a3e48e6-94fc-4363-9468-33d2dd4d7b00}".
 		/// </summary>
 		public static EventDescription GetEvent(string path)
